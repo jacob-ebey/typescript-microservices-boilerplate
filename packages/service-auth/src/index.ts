@@ -2,11 +2,14 @@ import * as express from 'express'
 
 import { expressApp, globalConfig } from '@packages/core'
 
+import { config } from './config'
+
+globalConfig()
+config()
+
 import { routes } from './routes'
 
 console.log('Starting Service...')
-
-globalConfig()
 
 const app: express.Express = expressApp(routes)
 

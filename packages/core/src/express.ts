@@ -1,8 +1,9 @@
+import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
 import * as express from 'express'
 import * as helmet from 'helmet'
 
-import { whitelist } from './config'
+import { whitelist } from './globalConfig'
 
 export type RequestHandler = (req: express.Request, res: express.Response, next?: express.NextFunction) => any
 
@@ -28,6 +29,9 @@ export function expressApp (middlewares?: ExpressMiddleware[]): express.Express 
 
   app.use(helmet())
   app.use(cors(corsOptions))
+
+  app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(bodyParser.json())
 
   if (middlewares) {
     middlewares.forEach((middleware: ExpressMiddleware) => {
