@@ -1,0 +1,21 @@
+{
+  "name": "@packages/service-auth",
+  "version": "1.0.0",
+  "description": "The auth service.",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "prepare": "tsc -p tsconfig.build.json",
+    "start": "node lib/index.js"
+  },
+  "author": "Jacob Ebey <jacob.ebey@live.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@packages/core": "*"
+  },
+  "ava": {
+    "files": [
+      "lib/**/*.spec.js"
+    ]
+  }
+}

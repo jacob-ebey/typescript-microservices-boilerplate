@@ -1,0 +1,41 @@
+{
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "dev": "cross-env NODE_ENV=development lerna run prepare && cross-env NODE_ENV=development lerna run --stream start",
+    "test": "lerna run test",
+    "prepare": "lerna run prepare",
+    "clean": "rimraf packages/**/lib",
+    "lint": "tslint 'packages/**/src/*.ts?(x)'",
+    "heroku-postinstall": "lerna bootstrap",
+    "start": "node packages/service-$SERVICE/lib/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "helmet": "^3.12.1",
+    "joi": "^13.3.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.4",
+    "@types/dotenv": "^4.0.3",
+    "@types/express": "^4.11.1",
+    "@types/helmet": "^0.0.37",
+    "@types/joi": "^13.0.8",
+    "@types/node": "^10.1.4",
+    "ava": "^0.25.0",
+    "cross-env": "^5.1.6",
+    "lerna": "^2.11.0",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.10.0",
+    "tslint-config-standard": "^7.0.0",
+    "typescript": "^2.9.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": "8.11.2"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "tslint.packageManager": "yarn",
+  "tslint.configFile": "tslint.json",
+  "cSpell.words": [
+    "middleware",
+    "middlewares"
+  ],
+  "typescript.format.insertSpaceAfterConstructor": true,
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": true
+} 
