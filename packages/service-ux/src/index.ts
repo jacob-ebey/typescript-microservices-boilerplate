@@ -1,4 +1,5 @@
 import * as express from 'express'
+import * as jwt from 'express-jwt'
 import { GraphQLServer } from 'graphql-yoga'
 
 import { expressApp, globalConfig } from '@packages/core'
@@ -17,7 +18,8 @@ const graphqlServer = new GraphQLServer({
   resolvers
 })
 
-graphqlServer.express.use(app)
+graphqlServer.use(app)
+graphqlServer.use('/graphql', jwt({ secret: process.env.JWT_SECRET || '' }))
 
 graphqlServer.start(
   {

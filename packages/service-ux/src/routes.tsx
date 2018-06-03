@@ -13,6 +13,11 @@ import { routes as clientRoutes } from './clientRoutes'
 
 export const routes: ExpressMiddleware[] = [
   {
+    path: '/favicon.ico',
+    disableCors: true,
+    handler: express.static(path.join(process.cwd(), 'public', 'favicon.ico'))
+  },
+  {
     path: '/static',
     disableCors: true,
     handler: express.static(path.join(process.cwd(), 'public'))
@@ -21,7 +26,11 @@ export const routes: ExpressMiddleware[] = [
     method: 'get',
     path: '*',
     disableCors: true,
-    handler: (req, res) => {
+    handler: (req, res, next) => {
+      if (req.url === '/playground') {
+        return next()
+      }
+
       // const branch = matchRoutes(clientRoutes, req.url)
 
       const app = ReactDOM.renderToString(

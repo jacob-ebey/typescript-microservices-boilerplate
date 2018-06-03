@@ -16,6 +16,10 @@ export const Html = ({ app, helmet }: HtmlProps) => {
         {helmet.title.toComponent()}
         {helmet.meta.toComponent()}
         {helmet.link.toComponent()}
+
+        <link rel='shortcut icon' href='/favicon.ico' />
+
+        <link rel='stylesheet' type='text/css' href='/static/normalize.css' />
       </head>
       <body {...bodyAttrs}>
         <div id='container' dangerouslySetInnerHTML={{ __html: app }} />

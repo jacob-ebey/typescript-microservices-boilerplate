@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "prepare": "tsc --jsx react -p tsconfig.build.json && webpack -p",
+    "prepare": "tsc --jsx react -p tsconfig.build.json && copy ./src/queries ./lib/queries &&  webpack -p",
     "start": "node lib/index.js",
     "dev": "nodemon"
   },
@@ -36,6 +36,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "nodemon": "^1.17.5",
+    "raw-loader": "^0.5.1",
     "webpack": "^4.10.2",
     "webpack-cli": "^3.0.1"
   },

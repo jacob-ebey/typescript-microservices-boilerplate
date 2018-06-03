@@ -2,7 +2,24 @@ import * as path from 'path'
 import * as joi from 'joi'
 const dotenv = require('dotenv')
 
-export const globalConfig = () => {
+export const endpoints = process.env.NODE_ENV === 'development'
+  ? {
+    auth: 'http://localhost:3001/'
+  } : {
+    auth: 'https://gh-service-auth.herokuapp.com/'
+  }
+
+export const whitelist: Set<string | undefined> = process.env.NODE_ENV === 'development'
+  ? new Set([
+    undefined,
+    'http://localhost:3000',
+    'http://localhost:3001'
+  ])
+  : new Set([
+    'https://gh-service-auth.herokuapp.com/'
+  ])
+
+export function globalConfig () {
   dotenv.config({
     path: path.join(process.cwd(), '../../.env')
   })
@@ -17,12 +34,3 @@ export const globalConfig = () => {
     throw new Error('Environment variables invalid:\n\t' + validation.error.message)
   }
 }
-
-export const whitelist: Set<string | undefined> = process.env.NODE_ENV === 'development'
-  ? new Set([
-    undefined,
-    'http://localhost:3001'
-  ])
-  : new Set([
-    'https://gh-service-auth.herokuapp.com/'
-  ])

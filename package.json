@@ -35,6 +35,7 @@
     "@types/jsonwebtoken": "^7.2.7",
     "@types/node": "^8",
     "ava": "^0.25.0",
+    "copy-dir-cli": "^0.0.3",
     "cross-env": "^5.1.6",
     "lerna": "^2.11.0",
     "nodemon": "^1.17.5",

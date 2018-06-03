@@ -5,3 +5,9 @@ declare module 'ws' {
 }
 
 declare module 'react-router-dom/StaticRouter'
+
+declare module '*.graphql'
+declare module '*.graphql' {
+  const value: string;
+  export default value
+}
