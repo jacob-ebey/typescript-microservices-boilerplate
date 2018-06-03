@@ -1,4 +1,4 @@
-import { AddressInfo, Server } from 'net'
+import { Server } from 'net'
 import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
 import * as express from 'express'
@@ -7,6 +7,12 @@ import * as helmet from 'helmet'
 import { ObjectSchema } from 'joi'
 
 import { whitelist } from './globalConfig'
+
+interface AddressInfo {
+  port: number
+  family: string
+  address: string
+}
 
 export type RequestHandler = (req: express.Request, res: express.Response, next: express.NextFunction) => any
 
@@ -75,7 +81,7 @@ export function gracefulShutdown (serviceName: string, app: express.Express, cle
   console.info(`Starting ${serviceName} Service...`)
 
   const server: Server = app.listen(process.env.PORT, () => {
-    const address: AddressInfo | string = server.address()
+    const address: AddressInfo = server.address()
 
     const startedOn = typeof address === 'string'
       ? address :

@@ -1,6 +1,6 @@
 {
   "watch": ["src"],
-  "ext": "ts,tsx",
+  "ext": "ts, tsx, graphql",
   "ignore": ["src/**/*.spec.ts"],
   "exec": "tsc --jsx react -p tsconfig.build.json && webpack --mode development && node lib/index.js"
 }

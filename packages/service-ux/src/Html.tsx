@@ -20,7 +20,7 @@ export const Html = ({ app, helmet }: HtmlProps) => {
       <body {...bodyAttrs}>
         <div id='container' dangerouslySetInnerHTML={{ __html: app }} />
 
-        <script src='bundle.js' />
+        <script src='/static/bundle.js' />
       </body>
     </html>
   )

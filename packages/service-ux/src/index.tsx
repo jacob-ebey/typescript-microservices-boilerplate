@@ -1,15 +1,31 @@
-import * as path from 'path'
 import * as express from 'express'
+import { GraphQLServer } from 'graphql-yoga'
 
-import { expressApp, gracefulShutdown, globalConfig } from '@packages/core'
+import { expressApp, globalConfig } from '@packages/core'
 
 globalConfig()
 
 import { routes } from './routes'
 
+import resolvers from './graphql/resolvers'
+import typeDefs from './graphql/schemas'
+
 const app: express.Express = expressApp(routes)
 
-console.log(process.cwd())
-app.use(express.static(path.join(process.cwd(), 'public')))
+const graphqlServer = new GraphQLServer({
+  typeDefs,
+  resolvers
+})
 
-gracefulShutdown('UX', app)
+graphqlServer.express.use(app)
+
+graphqlServer.start(
+  {
+    endpoint: '/graphql',
+    subscriptions: '/subscriptions',
+    playground: '/playground',
+    port: process.env.PORT
+  },
+  (options) => {
+    console.info(`Started UX Service on port: ${options.port}`)
+  })

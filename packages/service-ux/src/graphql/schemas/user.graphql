@@ -1,0 +1,6 @@
+type UserProfile {
+  id: ID!
+  username: String!
+  email: String!
+  phone: String
+}
