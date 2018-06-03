@@ -11,6 +11,7 @@ export const routes: ExpressMiddleware[] = [
   {
     method: 'get',
     path: '/',
+    disableCors: true,
     handler: (_, res) => {
       const app = ReactDOM.renderToString(<App />)
       const helmet = reactHelmet.renderStatic()

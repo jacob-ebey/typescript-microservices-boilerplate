@@ -2,6 +2,7 @@ import { AddressInfo, Server } from 'net'
 import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
 import * as express from 'express'
+import * as jwt from 'express-jwt'
 import * as helmet from 'helmet'
 import { ObjectSchema } from 'joi'
 
@@ -14,7 +15,8 @@ export interface ExpressMiddleware {
   handler: RequestHandler | RequestHandler[]
   method?: 'delete' | 'get' | 'post' | 'put'
   bodySchema?: ObjectSchema
-  authenticate?: boolean
+  disableCors?: boolean
+  auth?: boolean
 }
 
 const corsOptions: cors.CorsOptions = {
@@ -31,13 +33,20 @@ export function expressApp (middlewares?: ExpressMiddleware[]): express.Express 
   const app: express.Express = express()
 
   app.use(helmet())
-  app.use(cors(corsOptions))
 
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
 
   if (middlewares) {
     middlewares.forEach((middleware: ExpressMiddleware) => {
+
+      if (!middleware.disableCors) {
+        app.use(middleware.path, cors(corsOptions))
+      }
+
+      if (middleware.auth) {
+        app.use(middleware.path, jwt({ secret: process.env.JWT_SECRET || '' }))
+      }
 
       if (middleware.bodySchema) {
         app.use(middleware.path, (req, res, next) => {

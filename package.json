@@ -4,11 +4,11 @@
     "bootstrap": "lerna bootstrap",
     "dev": "lerna run prepare && cross-env NODE_ENV=development node ./scripts/dev.js",
     "test": "lerna run test",
-    "prepare": "lerna run prepare",
+    "prepare": "cross-env NODE_ENV=production lerna run prepare",
     "clean": "rimraf packages/**/lib",
     "lint": "tslint 'packages/**/src/*.ts?(x)'",
     "heroku-postinstall": "lerna bootstrap",
-    "start": "node packages/service-$SERVICE/lib/index.js"
+    "start": "(cd packages/service-$SERVICE && node ./lib/index.js)"
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
