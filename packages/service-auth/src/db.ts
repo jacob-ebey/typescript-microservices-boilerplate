@@ -1,13 +1,11 @@
-import { GraphDatabase, GraphDatabaseOptions } from 'neo4j'
+const seraph = require('seraph')
 
-const ops: GraphDatabaseOptions = {
-  url: process.env.GRAPH_URL || '',
-  auth: {
-    username: process.env.GRAPH_USER || '',
-    password: process.env.GRAPH_PASSWORD || ''
-  }
-}
+console.info('Connecting DB...')
 
-console.log(ops)
+export const db = seraph({
+  server: process.env.GRAPH_URL,
+  user: process.env.GRAPH_USER,
+  pass: process.env.GRAPH_PASSWORD
+})
 
-export const db = new GraphDatabase(ops)
+console.info('DB Connected')

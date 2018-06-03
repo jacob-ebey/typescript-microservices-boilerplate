@@ -1,0 +1,38 @@
+{
+  "name": "@packages/service-ux",
+  "version": "1.0.0",
+  "description": "The UX service.",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "prepare": "tsc --jsx react -p tsconfig.build.json && webpack -p",
+    "start": "node lib/index.js",
+    "dev": "nodemon"
+  },
+  "author": "Jacob Ebey <jacob.ebey@live.com>",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-helmet": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.3.16",
+    "@types/react-dom": "^16.0.5",
+    "@types/react-helmet": "^5.0.6",
+    "@packages/core": "*",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "nodemon": "^1.17.5",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^3.0.1"
+  },
+  "ava": {
+    "files": [
+      "lib/**/*.spec.js"
+    ]
+  }
+}

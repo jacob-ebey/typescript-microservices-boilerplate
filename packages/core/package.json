@@ -5,10 +5,14 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "prepare": "tsc -p tsconfig.build.json"
+    "prepare": "tsc -p tsconfig.build.json",
+    "dev": "nodemon"
   },
   "author": "Jacob Ebey <jacob.ebey@live.com>",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  },
   "ava": {
     "files": [
       "lib/**/*.spec.js"

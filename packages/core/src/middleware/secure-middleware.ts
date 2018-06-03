@@ -1,3 +1,5 @@
+import * as jwt from 'express-jwt'
+
 export function secure () {
-  // lol
+  return jwt({ secret: process.env.JWT_SECRET || '' })
 }
