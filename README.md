@@ -1,4 +1,4 @@
-# microservice-arch
+# typescript-microservices-boilerplate
 
 
 ## Getting started

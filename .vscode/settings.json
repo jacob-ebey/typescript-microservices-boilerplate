@@ -2,6 +2,7 @@
   "tslint.packageManager": "yarn",
   "tslint.configFile": "tslint.json",
   "cSpell.words": [
+    "ebey",
     "middleware",
     "middlewares"
   ],

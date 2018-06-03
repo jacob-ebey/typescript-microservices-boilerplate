@@ -4,9 +4,10 @@ import { HelmetData } from 'react-helmet'
 export interface HtmlProps extends React.HtmlHTMLAttributes<HTMLHtmlElement> {
   app: string
   helmet: HelmetData
+  graphqlState: any
 }
 
-export const Html = ({ app, helmet }: HtmlProps) => {
+export const Html = ({ app, graphqlState, helmet }: HtmlProps) => {
   const htmlAttrs = helmet.htmlAttributes.toComponent()
   const bodyAttrs = helmet.bodyAttributes.toComponent()
 
@@ -24,6 +25,9 @@ export const Html = ({ app, helmet }: HtmlProps) => {
       <body {...bodyAttrs}>
         <div id='container' dangerouslySetInnerHTML={{ __html: app }} />
 
+        <script dangerouslySetInnerHTML={{
+          __html: `window.__APOLLO_STATE__=${JSON.stringify(graphqlState).replace(/</g, '\\u003c')};`
+        }} />
         <script src='/static/bundle.js' />
       </body>
     </html>

@@ -1,6 +1,9 @@
+// import { UserProfile } from '@packages/core'
+
+import { GraphContext } from '../types'
+
 export const Query = {
-  me (source: any, args: any, context: any) {
-    console.log(source)
+  me (_: {}, args: {}, context: GraphContext) {
     console.log(args)
     console.log(context)
 

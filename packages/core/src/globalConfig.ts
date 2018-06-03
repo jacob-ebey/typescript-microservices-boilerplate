@@ -4,9 +4,11 @@ const dotenv = require('dotenv')
 
 export const endpoints = process.env.NODE_ENV === 'development'
   ? {
-    auth: 'http://localhost:3001/'
+    auth: 'http://localhost:3001/',
+    ux: 'http://localhost:3000/'
   } : {
-    auth: 'https://gh-service-auth.herokuapp.com/'
+    auth: 'https://gh-service-auth.herokuapp.com/',
+    ux: 'https://growhub.herokuapp.com/'
   }
 
 export const whitelist: Set<string | undefined> = process.env.NODE_ENV === 'development'

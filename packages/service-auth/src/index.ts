@@ -1,3 +1,5 @@
+require('es6-promise').polyfill()
+require('isomorphic-fetch')
 import * as express from 'express'
 
 import { expressApp, gracefulShutdown, globalConfig } from '@packages/core'

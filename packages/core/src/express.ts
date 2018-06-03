@@ -22,7 +22,8 @@ export interface ExpressMiddleware {
   method?: 'delete' | 'get' | 'post' | 'put'
   bodySchema?: ObjectSchema
   disableCors?: boolean
-  auth?: boolean
+  auth?: boolean,
+  queryAuth?: boolean
 }
 
 const corsOptions: cors.CorsOptions = {
@@ -50,8 +51,22 @@ export function expressApp (middlewares?: ExpressMiddleware[]): express.Express 
         app.use(middleware.path, cors(corsOptions))
       }
 
-      if (middleware.auth) {
-        app.use(middleware.path, jwt({ secret: process.env.JWT_SECRET || '' }))
+      if (middleware.auth || middleware.queryAuth) {
+        app.use(middleware.path, jwt({
+          secret: process.env.JWT_SECRET || '',
+          credentialsRequired: !middleware.queryAuth,
+          getToken: (req) => {
+            if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
+              (req as any).token = req.headers.authorization.split(' ')[1]
+              return req.headers.authorization.split(' ')[1]
+            } else if (middleware.queryAuth && req.query && req.query.token) {
+              (req as any).token = req.query.token
+              return req.query.token
+            }
+
+            return null
+          }
+        }))
       }
 
       if (middleware.bodySchema) {
