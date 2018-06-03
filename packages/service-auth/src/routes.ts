@@ -146,10 +146,10 @@ export const routes: ExpressMiddleware[] = [
               return res.json(await createResponse(result))
             })
           } catch (err) {
-            res.status(500)
+            res.status(500).send()
           }
         })
-        .catch((err) => { console.log(err); res.status(500).send() })
+        .catch(() => res.status(500).send())
     }
   }
 ]

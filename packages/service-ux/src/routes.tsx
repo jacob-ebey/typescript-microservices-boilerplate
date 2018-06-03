@@ -68,7 +68,7 @@ export const routes: ExpressMiddleware[] = [
         })
         .catch((err) => {
           if (err.networkError && err.networkError.statusCode === 401) {
-            console.log('Unauthorized Redirect...')
+            res.redirect('/login')
           }
 
           res.status(500).send()

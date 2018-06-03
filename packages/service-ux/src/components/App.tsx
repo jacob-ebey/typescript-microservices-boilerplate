@@ -1,10 +1,8 @@
 import * as React from 'react'
-import { Query } from 'react-apollo'
 import { Helmet } from 'react-helmet'
+import { renderRoutes } from 'react-router-config'
 
-import meQuery from '../queries/meQuery'
-
-export class App extends React.Component {
+export class App extends React.Component<any> {
   public static ssr: boolean = false
 
   public render () {
@@ -14,16 +12,8 @@ export class App extends React.Component {
           <title>Home Page</title>
         </Helmet>
         <div>Hello, World!</div>
-        <Query
-          query={meQuery}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return <p>Loading...</p>
-            if (error) return <p>Error :(</p>
 
-            return <pre><code>{JSON.stringify(data)}</code></pre>
-          }}
-        </Query>
+        {this.props.route && renderRoutes(this.props.route.routes)}
       </React.Fragment>
     )
   }
