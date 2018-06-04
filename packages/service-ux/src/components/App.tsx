@@ -7,14 +7,15 @@ export class App extends React.Component<any> {
 
   public render () {
     return (
-      <React.Fragment>
+      <div>
         <Helmet>
           <title>Home Page</title>
         </Helmet>
         <div>Hello, World!</div>
+        <button onClick={() => console.log('clicked')}>Click Me</button>
 
         {this.props.route && renderRoutes(this.props.route.routes)}
-      </React.Fragment>
+      </div>
     )
   }
 }

@@ -3,11 +3,12 @@ import { HelmetData } from 'react-helmet'
 
 export interface HtmlProps extends React.HtmlHTMLAttributes<HTMLHtmlElement> {
   app: string
-  helmet: HelmetData
   graphqlState: any
+  helmet: HelmetData
+  normalize: string
 }
 
-export const Html = ({ app, graphqlState, helmet }: HtmlProps) => {
+export const Html = ({ app, graphqlState, helmet, normalize }: HtmlProps) => {
   const htmlAttrs = helmet.htmlAttributes.toComponent()
   const bodyAttrs = helmet.bodyAttributes.toComponent()
 
@@ -18,9 +19,13 @@ export const Html = ({ app, graphqlState, helmet }: HtmlProps) => {
         {helmet.meta.toComponent()}
         {helmet.link.toComponent()}
 
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta name='Description' content='A microservice boilerplate.' />
         <link rel='shortcut icon' href='/favicon.ico' />
 
-        <link rel='stylesheet' type='text/css' href='/static/normalize.css' />
+        <style dangerouslySetInnerHTML={{ __html: normalize }}></style>
+        <script async defer src='/static/js/vendor.js' />
+        <script async defer src='/static/js/bundle.js' />
       </head>
       <body {...bodyAttrs}>
         <div id='container' dangerouslySetInnerHTML={{ __html: app }} />
@@ -28,7 +33,6 @@ export const Html = ({ app, graphqlState, helmet }: HtmlProps) => {
         <script dangerouslySetInnerHTML={{
           __html: `window.__APOLLO_STATE__=${JSON.stringify(graphqlState).replace(/</g, '\\u003c')};`
         }} />
-        <script src='/static/bundle.js' />
       </body>
     </html>
   )

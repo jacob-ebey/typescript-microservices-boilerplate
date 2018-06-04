@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "@packages/core",
   "version": "1.0.0",
   "description": "The core lib that other services will utilize.",

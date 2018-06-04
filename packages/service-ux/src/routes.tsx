@@ -2,6 +2,7 @@ import { ApolloClient } from 'apollo-boost'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
 import * as express from 'express'
+import * as fs from 'fs'
 import * as path from 'path'
 import * as React from 'react'
 import { ApolloProvider, getDataFromTree } from 'react-apollo'
@@ -14,6 +15,8 @@ import { ExpressMiddleware, endpoints } from '@packages/core'
 
 import { Html } from './Html'
 import { routes as clientRoutes } from './clientRoutes'
+
+const normalize = fs.readFileSync(path.join(process.cwd(), 'public', 'normalize.css')).toString()
 
 export const routes: ExpressMiddleware[] = [
   {
@@ -62,9 +65,16 @@ export const routes: ExpressMiddleware[] = [
 
           const appString = ReactDOM.renderToString(app)
 
-          const html = ReactDOM.renderToStaticMarkup(<Html helmet={helmet} app={appString} graphqlState={graphqlState} />)
+          const html = ReactDOM.renderToStaticMarkup(
+            <Html
+              helmet={helmet}
+              app={appString}
+              graphqlState={graphqlState}
+              normalize={normalize}
+            />
+          )
 
-          res.contentType('text/html').send(html)
+          res.contentType('text/html').send(`<!DOCTYPE html>${html}`)
         })
         .catch((err) => {
           if (err.networkError && err.networkError.statusCode === 401) {

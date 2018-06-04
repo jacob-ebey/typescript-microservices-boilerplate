@@ -1,10 +1,20 @@
 const path = require('path')
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
-  entry: './lib/client.js',
+  entry: {
+    bundle: './lib/client.js'
+  },
   output: {
-    path: path.join(process.cwd(), 'public'),
-    filename: 'bundle.js'
+    path: path.join(process.cwd(), 'public/js'),
+    filename: '[name].js',
+    chunkFilename: '[name].js'
+  },
+  optimization: {
+    splitChunks: {
+      name: 'vendor',
+      chunks: 'initial'
+    }
   },
   module: {
     rules: [
@@ -18,5 +28,8 @@ module.exports = {
         use: 'raw-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    // new BundleAnalyzerPlugin()
+  ]
 }

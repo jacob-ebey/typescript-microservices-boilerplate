@@ -1,5 +1,6 @@
 import { Server } from 'net'
 import * as bodyParser from 'body-parser'
+import * as compression from 'compression'
 import * as cors from 'cors'
 import * as express from 'express'
 import * as jwt from 'express-jwt'
@@ -39,6 +40,7 @@ const corsOptions: cors.CorsOptions = {
 export function expressApp (middlewares?: ExpressMiddleware[]): express.Express {
   const app: express.Express = express()
 
+  app.use(compression())
   app.use(helmet())
 
   app.use(bodyParser.urlencoded({ extended: false }))
