@@ -1,6 +1,6 @@
 {
   "watch": ["src"],
-  "ext": "ts, tsx, graphql",
+  "ext": "ts, tsx, graphql, less",
   "ignore": ["src/**/*.spec.ts"],
-  "exec": "tsc --jsx react -p tsconfig.build.json && webpack --mode development && node lib/index.js"
+  "exec": "tsc --jsx react -p tsconfig.build.json && copy ./src/queries ./lib/queries && lessc ./src/styles/main.less ./public/css/main.css --autoprefix=\"browsers\" &&  webpack && node lib/index.js"
 }

@@ -2,17 +2,18 @@ import * as React from 'react'
 import { Helmet } from 'react-helmet'
 import { renderRoutes } from 'react-router-config'
 
+import { Header } from './Header'
+
 export class App extends React.Component<any> {
   public static ssr: boolean = false
 
   public render () {
     return (
-      <div>
+      <div className='App'>
         <Helmet>
           <title>Home Page</title>
         </Helmet>
-        <div>Hello, World!</div>
-        <button onClick={() => console.log('clicked')}>Click Me</button>
+        <Header />
 
         {this.props.route && renderRoutes(this.props.route.routes)}
       </div>

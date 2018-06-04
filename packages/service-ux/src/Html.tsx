@@ -3,12 +3,13 @@ import { HelmetData } from 'react-helmet'
 
 export interface HtmlProps extends React.HtmlHTMLAttributes<HTMLHtmlElement> {
   app: string
+  css: string
   graphqlState: any
   helmet: HelmetData
   normalize: string
 }
 
-export const Html = ({ app, graphqlState, helmet, normalize }: HtmlProps) => {
+export const Html = ({ app, css, graphqlState, helmet, normalize }: HtmlProps) => {
   const htmlAttrs = helmet.htmlAttributes.toComponent()
   const bodyAttrs = helmet.bodyAttributes.toComponent()
 
@@ -24,6 +25,7 @@ export const Html = ({ app, graphqlState, helmet, normalize }: HtmlProps) => {
         <link rel='shortcut icon' href='/favicon.ico' />
 
         <style dangerouslySetInnerHTML={{ __html: normalize }}></style>
+        <style dangerouslySetInnerHTML={{ __html: css }}></style>
         <script async defer src='/static/js/vendor.js' />
         <script async defer src='/static/js/bundle.js' />
       </head>

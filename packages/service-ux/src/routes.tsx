@@ -17,6 +17,7 @@ import { Html } from './Html'
 import { routes as clientRoutes } from './clientRoutes'
 
 const normalize = fs.readFileSync(path.join(process.cwd(), 'public', 'normalize.css')).toString()
+const css = fs.readFileSync(path.join(process.cwd(), 'public', 'css', 'main.css')).toString()
 
 export const routes: ExpressMiddleware[] = [
   {
@@ -70,6 +71,7 @@ export const routes: ExpressMiddleware[] = [
               helmet={helmet}
               app={appString}
               graphqlState={graphqlState}
+              css={css}
               normalize={normalize}
             />
           )

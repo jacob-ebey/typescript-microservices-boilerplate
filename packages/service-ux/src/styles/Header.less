@@ -1,0 +1,53 @@
+@import "_variables.less";
+
+.Header {
+  display: flex;
+  height: 60px;
+
+  background: @Header-background;
+  color: @Header-font-color;
+
+  &--pusher {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &--item {
+    color: @Header-font-color;
+    padding: 0 20px;
+
+    &__link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: inherit;
+      font-weight: inherit;
+    }
+
+    &__centered {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__dropdown {
+      cursor: pointer;
+      user-select: none;
+      border-right: 1px solid @Header-separator-color;
+    }
+  }
+
+  &--avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid @Header-avatar-border-color;
+    border-radius: 50%;
+  }
+  
+  &--username {
+    margin-left: 20px;
+  }
+}
