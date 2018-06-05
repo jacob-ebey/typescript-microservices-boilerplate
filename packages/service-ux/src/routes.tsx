@@ -17,7 +17,7 @@ import { Html } from './Html'
 import { routes as clientRoutes } from './clientRoutes'
 
 const normalize = fs.readFileSync(path.join(process.cwd(), 'public', 'normalize.css')).toString()
-const css = fs.readFileSync(path.join(process.cwd(), 'public', 'css', 'main.css')).toString()
+let css = fs.readFileSync(path.join(process.cwd(), 'public', 'css', 'main.css')).toString()
 
 export const routes: ExpressMiddleware[] = [
   {
@@ -65,6 +65,10 @@ export const routes: ExpressMiddleware[] = [
           const graphqlState = client.extract()
 
           const appString = ReactDOM.renderToString(app)
+
+          if (process.env.NODE_ENV === 'development') {
+            css = fs.readFileSync(path.join(process.cwd(), 'public', 'css', 'main.css')).toString()
+          }
 
           const html = ReactDOM.renderToStaticMarkup(
             <Html

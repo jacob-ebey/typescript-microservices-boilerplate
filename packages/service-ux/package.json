@@ -6,9 +6,14 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "prepare": "tsc --jsx react -p tsconfig.build.json && copy ./src/queries ./lib/queries && lessc ./src/styles/main.less ./public/css/main.css --autoprefix=\"browsers\" -x &&  webpack -p",
-    "start": "node lib/index.js",
-    "dev": "nodemon"
+    "prepare": "yarn build:ts && yarn build:client && yarn build:less",
+    "build:client": "webpack -p",
+    "build:less": "lessc ./src/styles/main.less ./public/css/main.css --autoprefix=\"browsers\" -x",
+    "build:ts": "tsc --jsx react -p tsconfig.build.json",
+    "dev:server": "nodemon --watch lib --watch src/graphql/schemas --watch src/styles -e js,graphql,less ./lib/index.js",
+    "dev:webpack": "webpack --watch",
+    "dev": "cross-env NODE_ENV=development yarn build:ts && cross-env NODE_ENV=development node ./dev.js",
+    "start": "node lib/index.js"
   },
   "author": "Jacob Ebey <jacob.ebey@live.com>",
   "license": "ISC",
@@ -43,8 +48,10 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "chokidar": "^2.0.3",
     "less": "^3.0.4",
     "less-plugin-autoprefix": "^1.5.1",
+    "node-cmd": "^3.0.0",
     "nodemon": "^1.17.5",
     "raw-loader": "^0.5.1",
     "webpack": "4.5.0",

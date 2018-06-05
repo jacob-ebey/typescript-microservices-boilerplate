@@ -34,6 +34,27 @@
       cursor: pointer;
       user-select: none;
       border-right: 1px solid @Header-separator-color;
+
+      & > .Header--item--dropdown {
+        display: none;
+      }
+
+      &:hover, &:active {
+        & > .Header--item--dropdown {
+          display: unset;
+        }
+      }
+    }
+
+    &--dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        min-width: 200px;
+        color: @font-color__primary;
+        background: @color--white;
+        box-shadow: 3px 3px 10px 0px rgba(50, 50, 50, 0.75);
     }
   }
 

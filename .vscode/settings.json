@@ -2,8 +2,12 @@
   "tslint.packageManager": "yarn",
   "tslint.configFile": "tslint.json",
   "cSpell.words": [
+    "autoprefix",
+    "dropdown",
     "ebey",
+    "inmemory",
     "lessc",
+    "microservices",
     "middleware",
     "middlewares"
   ],

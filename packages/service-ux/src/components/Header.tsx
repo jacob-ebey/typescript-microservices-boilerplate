@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import { DetailList } from './DetailList'
+
 export class Header extends React.Component {
   public render () {
     return (
@@ -9,6 +11,23 @@ export class Header extends React.Component {
             <div className='icon profile-solid' />
           </div>
           <span className='Header--username'>typescript-microservices-boilerplate</span>
+
+          <div className='Header--item--dropdown'>
+            <DetailList
+              items={[
+                { id: 1, label: 'test' }
+              ]}
+              keyProp='id'
+              columns={[
+                { key: 'user', icon: 'profile-solid' },
+                {
+                  key: 'label',
+                  prop: 'label',
+                  grow: true
+                }
+              ]}
+            />
+          </div>
         </div>
 
         <div className='Header--pusher' />
